@@ -191,10 +191,9 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
   private static final String TABLE_TYPE_DISPLAY = "Table Types";
 
 
-  public static final String TABLE_LIMIT_CONFIG = "table.limit";
-  private static final String TABLE_LIMIT_DOC =
-      "If specified adds a LIMIT onto the query.";
-  public static final int TABLE_LIMIT_DEFAULT = 0;
+  public static final String FETCH_SIZE_CONFIG = "table.limit";
+  private static final String FETCH_SIZE_DOC = "If specified sets a fetch size on the prepared statments to prevent out of memory errors.";
+  public static final int FETCH_SIZE_DEFAULT = 500;
 
 
   public static ConfigDef baseConfigDef() {
@@ -224,7 +223,7 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
         .define(TABLE_POLL_INTERVAL_MS_CONFIG, Type.LONG, TABLE_POLL_INTERVAL_MS_DEFAULT, Importance.LOW, TABLE_POLL_INTERVAL_MS_DOC, CONNECTOR_GROUP, 3, Width.SHORT, TABLE_POLL_INTERVAL_MS_DISPLAY)
         .define(TOPIC_PREFIX_CONFIG, Type.STRING, Importance.HIGH, TOPIC_PREFIX_DOC, CONNECTOR_GROUP, 4, Width.MEDIUM, TOPIC_PREFIX_DISPLAY)
         .define(TIMESTAMP_DELAY_INTERVAL_MS_CONFIG, Type.LONG, TIMESTAMP_DELAY_INTERVAL_MS_DEFAULT, Importance.HIGH, TIMESTAMP_DELAY_INTERVAL_MS_DOC, CONNECTOR_GROUP, 5, Width.MEDIUM, TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY)
-        .define(TABLE_LIMIT_CONFIG, Type.INT, TABLE_LIMIT_DEFAULT, Importance.LOW, TABLE_LIMIT_DOC);
+        .define(FETCH_SIZE_CONFIG, Type.INT, FETCH_SIZE_DEFAULT, Importance.LOW, FETCH_SIZE_DOC);
   }
 
   public static final ConfigDef CONFIG_DEF = baseConfigDef();

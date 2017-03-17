@@ -79,6 +79,12 @@ public class CachedConnectionProvider {
   }
 
   protected void onConnect(Connection connection) throws SQLException {
+    try {
+      connection.setAutoCommit(false);
+    } catch (SQLException e) {
+      log.error("Could not set autocommit false: {}", e);
+      throw new ConnectException(e);
+    }
   }
 
 }

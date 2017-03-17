@@ -146,21 +146,12 @@ public class TimestampIncrementingTableQuerier extends TableQuerier {
     log.debug("{} prepared SQL query: {}", this, queryString);
 
 
-    // HHHAAAAAAAAAAAACK!
-    try {
-      db.setAutoCommit(false);
-    } catch (SQLException e) {
-      log.error("Could not set autocommit false: {}", e);
-      throw new ConnectException(e);
-    }
-
     stmt = db.prepareStatement(queryString);
-    // HHHHAAAAAAAAAACk
-    log.info("setting fetch properties");
+
+    int FETCH_SIZE = 50;
+    log.debug("Setting max fetch size to {}.", FETCH_SIZE);
+    stmt.setFetchSize(FETCH_SIZE);
     stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
-    stmt.setFetchSize(50);
-
-
   }
 
   @Override
